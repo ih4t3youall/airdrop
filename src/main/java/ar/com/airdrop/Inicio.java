@@ -3,14 +3,12 @@ package ar.com.airdrop;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.exceptions.ArchivoNoExisteException;
 import ar.com.airdrop.exceptions.ServiceException;
-import ar.com.airdrop.persistencia.Persistencia;
-import ar.com.airdrop.services.IpService;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.RecepcionService;
 import ar.com.airdrop.vistas.MenuPrincipal;
 import ar.com.commons.send.airdrop.Pc;
+import ar.com.commons.send.services.IpService;
 
 public class Inicio {
 
@@ -38,7 +36,7 @@ public class Inicio {
 			pcService.setNombreLocal(pc.getNombreEquipo());
 
 			
-		} catch (ServiceException e) {
+		} catch (Exception e) {
 			JOptionPane
 					.showMessageDialog(null,
 							"Error al obtener la ip local, verifique su conexion a internet");

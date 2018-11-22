@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 
+
 public class PantallaMuestraRespuestaComando extends JFrame{
 
 	
