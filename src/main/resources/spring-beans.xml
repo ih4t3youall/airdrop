@@ -13,9 +13,9 @@
 	<bean id="envioService" class="ar.com.airdrop.services.EnvioService">
 	    
 	</bean>
-	<bean id="recepcionService" class="ar.com.airdrop.services.RecepcionService">
-	</bean>
 	<bean id="archivoService" class="ar.com.airdrop.services.ArchivoService">
+	</bean>
+	<bean id="recepcionService" class="ar.com.airdrop.services.RecepcionService">
 	</bean>
 
 	

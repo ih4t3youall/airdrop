@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import ar.com.airdrop.dominio.Mensaje;
 import ar.com.airdrop.exceptions.EnviarSocketException;
+import ar.com.commons.send.airdrop.Mensaje;
 
 public class EnviarMensaje extends Thread{
 	

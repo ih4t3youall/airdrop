@@ -3,8 +3,8 @@ package ar.com.airdrop.services;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.ServiceException;
+import ar.com.commons.send.airdrop.Pc;
 
 
 public class IpService {

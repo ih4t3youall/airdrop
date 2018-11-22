@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 
 import ar.com.airdrop.componentes.BarraDeMenu;
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.ArchivoNoExisteException;
 import ar.com.airdrop.listeners.EscanearListener;
 import ar.com.airdrop.listeners.IngresarIpListener;
@@ -26,6 +25,7 @@ import ar.com.airdrop.listeners.ListenerEnviarMensaje;
 import ar.com.airdrop.listeners.ListnerEnviarComando;
 import ar.com.airdrop.persistencia.Persistencia;
 import ar.com.airdrop.services.PcService;
+import ar.com.commons.send.airdrop.Pc;
 
 public class MenuPrincipal extends JFrame {
 

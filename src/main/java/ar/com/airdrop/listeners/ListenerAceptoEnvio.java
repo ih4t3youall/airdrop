@@ -8,8 +8,8 @@ import java.net.Socket;
 import javax.swing.JFileChooser;
 
 import ar.com.airdrop.constantes.Constantes;
-import ar.com.airdrop.dominio.Mensaje;
 import ar.com.airdrop.services.EnvioService;
+import ar.com.commons.send.airdrop.Mensaje;
 
 public class ListenerAceptoEnvio implements ActionListener {
 

@@ -1,5 +1,7 @@
 package ar.com.airdrop.vistas;
 
+import ar.com.commons.send.airdrop.Mensaje;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -13,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ar.com.airdrop.dominio.Mensaje;
 
 public class VistaRecibirMensajePrompt extends JFrame {
 

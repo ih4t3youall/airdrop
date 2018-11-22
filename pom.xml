@@ -10,11 +10,17 @@
   
   <properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
+      <snipplet.commons>1.2.2</snipplet.commons>
 	</properties>
 	
   <dependencies>
 
-    
+
+	  <dependency>
+		  <groupId>ar.com.commons</groupId>
+		  <artifactId>send</artifactId>
+		  <version>${snipplet.commons}</version>
+	  </dependency>
     	<!-- Spring 3 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -1,5 +1,7 @@
 package ar.com.airdrop.vistas;
 
+import ar.com.commons.send.airdrop.Pc;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Panel;
@@ -12,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ar.com.airdrop.dominio.Pc;
 
 public class Editar extends JFrame {
 

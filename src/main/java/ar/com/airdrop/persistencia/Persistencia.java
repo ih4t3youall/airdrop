@@ -77,4 +77,22 @@ public class Persistencia {
 		}
 
 	}
+
+	public static String getDownloadDirectory(){
+		String userHome = System.getProperty("user.home");
+		String airdropDownloads = "/airdrop/downloads";
+		if(directoryExist(userHome+airdropDownloads)){
+			return userHome + airdropDownloads;
+		}else{
+		File file = new File(userHome+airdropDownloads);
+		file.mkdir();
+		return file.getAbsolutePath();
+
+		}
+
+	}
+	private static boolean directoryExist(String directory){
+		return new File(directory).exists();
+
+	}
 }

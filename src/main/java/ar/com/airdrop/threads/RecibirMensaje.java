@@ -12,8 +12,6 @@ import javax.swing.JFileChooser;
 
 import ar.com.airdrop.constantes.Constantes;
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Mensaje;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.RecibirServerSocketException;
 import ar.com.airdrop.services.ArchivoService;
 import ar.com.airdrop.services.EnvioService;
@@ -21,6 +19,8 @@ import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.vistas.MenuPrincipal;
 import ar.com.airdrop.vistas.PantallaMuestraRespuestaComando;
 import ar.com.airdrop.vistas.VistaRecibirMensajePrompt;
+import ar.com.commons.send.airdrop.Mensaje;
+import ar.com.commons.send.airdrop.Pc;
 
 public class RecibirMensaje extends Thread {
 

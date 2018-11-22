@@ -3,9 +3,9 @@ package ar.com.airdrop.services;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.ArchivoNoExisteException;
 import ar.com.airdrop.persistencia.Persistencia;
+import ar.com.commons.send.airdrop.Pc;
 
 public class PcService implements Serializable{
 

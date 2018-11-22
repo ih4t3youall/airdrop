@@ -7,10 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.vistas.VistaEnviarArchivo;
-
+import ar.com.commons.send.airdrop.Pc;
 
 
 public class ListenerEnviarArchivo implements ActionListener {

@@ -3,15 +3,14 @@ package ar.com.airdrop.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Mensaje;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.EnviarSocketException;
 import ar.com.airdrop.services.EnvioService;
 import ar.com.airdrop.vistas.PantallaIngresarComando;
+import ar.com.commons.send.airdrop.Mensaje;
+import ar.com.commons.send.airdrop.Pc;
 
 public class ListnerMenuBarEnviarComando implements ActionListener {
 

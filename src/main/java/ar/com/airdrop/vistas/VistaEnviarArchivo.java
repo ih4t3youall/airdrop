@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 
 import ar.com.airdrop.constantes.Constantes;
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Mensaje;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.services.ArchivoService;
 import ar.com.airdrop.services.EnvioService;
+import ar.com.commons.send.airdrop.Mensaje;
+import ar.com.commons.send.airdrop.Pc;
 
 public class VistaEnviarArchivo extends JFrame {
 
