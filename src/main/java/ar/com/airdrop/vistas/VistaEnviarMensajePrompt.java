@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.exceptions.EnviarSocketException;
 import ar.com.airdrop.services.EnvioService;
+import ar.com.commons.send.airdrop.Mensaje;
 import ar.com.commons.send.airdrop.Pc;
 
 public class VistaEnviarMensajePrompt extends JFrame {
@@ -52,7 +53,6 @@ public class VistaEnviarMensajePrompt extends JFrame {
 		
 		cancelar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			dispose();
 				
@@ -61,7 +61,6 @@ public class VistaEnviarMensajePrompt extends JFrame {
 
 		aceptar.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Mensaje mensaje = new Mensaje(pc);
 

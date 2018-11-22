@@ -26,7 +26,6 @@ public class ListnerMenuBar implements ActionListener {
 		this.contextoPadre = contextoPadre2;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent event) {
 
 		JMenuItem menuItem = (JMenuItem) event.getSource();

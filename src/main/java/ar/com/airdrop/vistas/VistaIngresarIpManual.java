@@ -51,7 +51,6 @@ public class VistaIngresarIpManual extends JFrame {
 	
 		aceptar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Pc pc = pcService.getPcLocal();
@@ -86,7 +85,6 @@ public class VistaIngresarIpManual extends JFrame {
 		
 		cancelar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				

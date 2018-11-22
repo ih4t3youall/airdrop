@@ -17,7 +17,6 @@ public class EscanearListener implements ActionListener {
 	}
 	
 	
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 	
 		try {

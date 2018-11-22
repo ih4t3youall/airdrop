@@ -26,7 +26,6 @@ public class ListnerMenuBarEnviarComando implements ActionListener {
 		this.contexto = contexto;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 	
 		JMenuItem boton = (JMenuItem) arg0.getSource();

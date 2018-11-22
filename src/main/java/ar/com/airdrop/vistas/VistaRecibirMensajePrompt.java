@@ -55,7 +55,6 @@ public class VistaRecibirMensajePrompt extends JFrame {
 		this.setResizable(false);
 		portaPapeles.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				cb.setContents(aCopiar, null);
@@ -65,7 +64,6 @@ public class VistaRecibirMensajePrompt extends JFrame {
 
 		aceptar.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 

@@ -1,5 +1,7 @@
 package ar.com.airdrop.vistas;
 
+import ar.com.commons.send.airdrop.Mensaje;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import ar.com.airdrop.dominio.Mensaje;
 
 public class PantallaMuestraRespuestaComando extends JFrame{
 
@@ -39,7 +40,6 @@ public class PantallaMuestraRespuestaComando extends JFrame{
 		texto.setText(mensaje.getMensaje());
 		aceptar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
 				dispose();

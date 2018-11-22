@@ -52,7 +52,6 @@ public class Editar extends JFrame {
 		nombreEquipo.setText(pc.getNombreEquipo());
 		
 		aceptar.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				pc.setIp(ip.getText());
 				pc.setNombreEquipo(nombreEquipo.getText());
@@ -64,7 +63,6 @@ public class Editar extends JFrame {
 
 		cancelar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				contexto.dispose();
@@ -74,7 +72,6 @@ public class Editar extends JFrame {
 		
 		eliminar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				contextoPadre.eliminarElSeleccionado();

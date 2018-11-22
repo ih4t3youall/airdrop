@@ -52,7 +52,6 @@ public class PantallaIngresarComando extends JFrame {
 		this.setResizable(false);
 		aceptar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
 				
@@ -78,7 +77,6 @@ public class PantallaIngresarComando extends JFrame {
 		
 		cancelar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				

@@ -3,7 +3,6 @@ package ar.com.airdrop;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.Pc;
 import ar.com.airdrop.exceptions.ArchivoNoExisteException;
 import ar.com.airdrop.exceptions.ServiceException;
 import ar.com.airdrop.persistencia.Persistencia;
@@ -11,6 +10,7 @@ import ar.com.airdrop.services.IpService;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.RecepcionService;
 import ar.com.airdrop.vistas.MenuPrincipal;
+import ar.com.commons.send.airdrop.Pc;
 
 public class Inicio {
 

@@ -11,7 +11,7 @@ public class RecepcionService {
 
 
 	public void iniciarServerSocketObjetos(MenuPrincipal menuPrincipal){
-		
+
 		RecibirMensaje recibirMensaje;
 		try {
 			recibirMensaje = new RecibirMensaje(menuPrincipal);
