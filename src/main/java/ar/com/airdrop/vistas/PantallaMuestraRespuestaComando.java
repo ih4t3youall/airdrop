@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import ar.com.airdrop.dominio.Mensaje;
+import ar.com.commons.send.airdrop.Mensaje;
 
 public class PantallaMuestraRespuestaComando extends JFrame{
 
@@ -39,7 +40,6 @@ public class PantallaMuestraRespuestaComando extends JFrame{
 		texto.setText(mensaje.getMensaje());
 		aceptar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
 				dispose();
