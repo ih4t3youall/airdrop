@@ -7,8 +7,8 @@ import java.net.Socket;
 
 import javax.swing.JFileChooser;
 
-import ar.com.airdrop.constantes.Constantes;
 import ar.com.airdrop.services.EnvioService;
+import ar.com.commons.send.airdrop.Constantes;
 import ar.com.commons.send.airdrop.Mensaje;
 
 public class ListenerAceptoEnvio implements ActionListener {
@@ -27,7 +27,7 @@ public class ListenerAceptoEnvio implements ActionListener {
 	
 		
 		try {
-			Socket socket = new Socket(mensaje.getIpDestino(),Constantes.PUERTO_ARCHIVOS);
+			Socket socket = new Socket(mensaje.getIpDestino(), Constantes.PUERTO_ARCHIVOS);
 			
 			JFileChooser jfc = new JFileChooser();
 			 jfc.showOpenDialog(null);

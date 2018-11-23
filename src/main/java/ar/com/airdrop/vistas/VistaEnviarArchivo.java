@@ -1,15 +1,12 @@
 package ar.com.airdrop.vistas;
 
 import java.io.File;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import ar.com.airdrop.constantes.Constantes;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.services.ArchivoService;
 import ar.com.airdrop.services.EnvioService;
@@ -46,11 +43,6 @@ public class VistaEnviarArchivo extends JFrame {
 				envioService.enviarMensaje(mensaje);
 				
 				
-//				Socket socket = new Socket(mensaje.getIpDestino(),
-//						Constantes.PUERTO_ARCHIVOS);
-//				envioService.enviaFichero(mensaje.getFile()
-//						.getAbsolutePath(),
-//						new ObjectOutputStream(socket.getOutputStream()));
 			}
 		} catch (Exception e) {
 
