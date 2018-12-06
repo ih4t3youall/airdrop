@@ -80,7 +80,7 @@ public class Persistencia {
 
 	public static String getDownloadDirectory(){
 		String userHome = System.getProperty("user.home");
-		String airdropDownloads = "/airdrop/downloads";
+		String airdropDownloads = "/Downloads";
 		if(directoryExist(userHome+airdropDownloads)){
 			return userHome + airdropDownloads;
 		}else{

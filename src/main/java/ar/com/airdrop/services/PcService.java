@@ -38,8 +38,6 @@ public class PcService implements Serializable{
 	
 	public Pc getPcLocal() {
 
-		
-		
 		return pcLocal;
 	}
 
