@@ -12,10 +12,11 @@ import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.exceptions.ArchivoNoExisteException;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.vistas.MenuPrincipal;
+import ar.com.commons.send.services.IpService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Persistencia {
 
-	
 
 	public void Guardar(PcService pcService) {
 		Object obj = pcService;
@@ -52,8 +53,7 @@ public class Persistencia {
 
 			PcService service = (PcService) aux;
 			pcService.setPcExternas(service.obtenerListaPcExternas());
-			pcService.setIpLocalhost(service.obtenerIpLocal());
-			
+
 			
 			
 		} catch (Exception e) {

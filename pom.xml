@@ -10,7 +10,7 @@
   
   <properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
-      <snipplet.commons>1.2.2</snipplet.commons>
+      <snipplet.commons>1.2.3</snipplet.commons>
 	</properties>
 	
   <dependencies>
