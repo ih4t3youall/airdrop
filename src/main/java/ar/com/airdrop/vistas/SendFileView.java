@@ -32,7 +32,7 @@ public class SendFileView extends JFrame {
 
 			if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-				Message mensaje = new Message(this.pc, "archivo", this.pc.getIp());
+				Message mensaje = new Message(this.pc, "archivo", this.pc.getIp(),null,null);
 				//TODO(not implemented)
 				//mensaje.setNombreArchivo(jfc.getSelectedFile().getName());
 			//	mensaje.setFile(jfc.getSelectedFile());

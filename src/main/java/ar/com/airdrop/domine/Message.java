@@ -4,10 +4,14 @@ public class Message {
     private Pc senderPc;
     private String command;
     private String targetIp;
-    public Message(  Pc senderPc,   String command,   String targetIp) {
+    private String payload;
+    private String payloadType;
+    public Message(  Pc senderPc,   String command,   String targetIp, String payload, String payloadType) {
         this.senderPc = senderPc;
         this.command = command;
         this.targetIp = targetIp;
+        this.payload = payload;
+        this.payloadType = payloadType;
     }
 
 
@@ -33,5 +37,21 @@ public class Message {
 
     public void setTargetIp(String targetIp) {
         this.targetIp = targetIp;
+    }
+
+    public String getPayload() {
+        return payload;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
+
+    public String getPayloadType() {
+        return payloadType;
+    }
+
+    public void setPayloadType(String payloadType) {
+        this.payloadType = payloadType;
     }
 }

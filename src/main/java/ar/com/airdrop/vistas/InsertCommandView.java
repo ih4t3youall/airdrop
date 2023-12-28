@@ -11,8 +11,8 @@ import javax.swing.JTextField;
 
 import ar.com.airdrop.componentes.SendCommandMenuBar;
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
-import ar.com.airdrop.domine.TextMessage;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
 import ar.com.airdrop.services.SendService;
 import ar.com.airdrop.services.PcService;
@@ -58,7 +58,7 @@ public class InsertCommandView extends JFrame {
 				//TODO ipservice not implemented el primer parametro deberia ser la pc local
 				Pc pc = new Pc("192.168.1.1");
 
-				TextMessage textMessage = new TextMessage(pc,"bash", pcExterna.getIp(), textoComando.getText());
+				Message textMessage = new Message(pc,"bash", pcExterna.getIp(), textoComando.getText(),null);
 				try {
 					sendService.sendMessage(textMessage);
 				} catch (SendThroughtSocketException e1) {

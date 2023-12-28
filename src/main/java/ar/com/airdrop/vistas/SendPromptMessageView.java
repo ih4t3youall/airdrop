@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
-import ar.com.airdrop.domine.TextMessage;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.SendService;
@@ -67,7 +66,7 @@ public class SendPromptMessageView extends JFrame {
 		aceptar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				Message mensaje = new TextMessage(pcService.getLocalPc(),"mensajePrompt", pcExterna.getIp(), textfield.getText());
+				Message mensaje = new Message(pcService.getLocalPc(),"mensajePrompt", pcExterna.getIp(), textfield.getText(),null);
 				try {
 					sendService.sendMessage(mensaje);
 				} catch (SendThroughtSocketException e1) {

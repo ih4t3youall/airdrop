@@ -37,7 +37,7 @@ public class Scanner {
 		for (Pc pc : pcs) {
 			if (!pc.getIp().equals(pcService.getLocalPcIp())) {
 
-				Message message = new Message(pcService.getLocalPc(),"who",pc.getIp());
+				Message message = new Message(pcService.getLocalPc(),"who",pc.getIp(),null,null);
 
 				try {
 					sendService.sendMessage(message);

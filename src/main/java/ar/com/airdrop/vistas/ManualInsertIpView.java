@@ -55,7 +55,7 @@ public class ManualInsertIpView extends JFrame {
 				
 				Pc pc = pcService.getLocalPc();
 				
-				Message mensaje = new Message(pc,"who", textoIp.getText());
+				Message mensaje = new Message(pc,"who", textoIp.getText(),null,null);
 
 				try {
 					

@@ -4,7 +4,6 @@ import ar.com.airdrop.context.Constants;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
-import ar.com.airdrop.domine.TextMessage;
 import ar.com.airdrop.exceptions.ServerSocketReceivingException;
 import ar.com.airdrop.services.FileService;
 import ar.com.airdrop.services.PcService;
@@ -70,7 +69,7 @@ public class ReceiveMessage extends Thread {
 
                     pcService.addPcExterna(messageReceived.getSenderPc());
                     //TODO la pc esta nula
-                    Message mensajeRespuesta = new Message(pcResponse,"autenticar",ipOtroCliente);
+                    Message mensajeRespuesta = new Message(pcResponse,"autenticar",ipOtroCliente,null,null);
                     sendService.sendMessage(mensajeRespuesta);
 
                 }
@@ -86,7 +85,7 @@ public class ReceiveMessage extends Thread {
 
                 if (messageReceived.getCommand().equals("mensajePrompt")) {
 
-                    new ReceivePromptMessageView((TextMessage)messageReceived);
+                    new ReceivePromptMessageView((Message)messageReceived);
 
                 }
 

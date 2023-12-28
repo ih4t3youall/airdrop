@@ -1,6 +1,6 @@
 package ar.com.airdrop.vistas;
 
-import ar.com.airdrop.domine.TextMessage;
+import ar.com.airdrop.domine.Message;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,10 +28,10 @@ public class ReceivePromptMessageView extends JFrame {
 	JButton aceptar = new JButton("Ok");
 	StringSelection toCopy;
 
-	public ReceivePromptMessageView(TextMessage message) {
+	public ReceivePromptMessageView(Message message) {
 
 		String text = "";
-		text = message.getTextMessage();
+		text = message.getPayload();
 
 		toCopy = new StringSelection(text);
 

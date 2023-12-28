@@ -1,6 +1,7 @@
 package ar.com.airdrop.vistas;
 
-import ar.com.airdrop.domine.TextMessage;
+
+import ar.com.airdrop.domine.Message;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ public class CommandResponseView extends JFrame{
 	public JButton aceptar;
 	public JTextArea texto;
 	
-	public CommandResponseView(TextMessage message){
+	public CommandResponseView(Message message){
 		
 		aceptar = new JButton("Aceptar");
 		texto = new JTextArea(10, 20);
@@ -32,7 +33,7 @@ public class CommandResponseView extends JFrame{
 		
 		add(sbrText);
 		add(aceptar);
-		texto.setText(message.getTextMessage());
+		texto.setText(message.getPayload());
 		aceptar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
