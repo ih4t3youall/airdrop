@@ -28,19 +28,19 @@ public class ListnerMenuBar implements ActionListener {
 
 		JMenuItem menuItem = (JMenuItem) event.getSource();
 
-		if (menuItem.getText().equals("Editar Local")) {
+		if (menuItem.getText().equals("Edit Local")) {
 
-			new Edit(pcService.getPcLocal(),contextoPadre);
+			new Edit(pcService.getLocalPc(),contextoPadre);
 
 		}
-		if (menuItem.getText().equals("Guardar")) {
+		if (menuItem.getText().equals("Save")) {
 			
 			 
 				 Persistence persistence = new Persistence();
 				 persistence.Guardar(pcService);
 			
 		}
-		if (menuItem.getText().equals("Cargar")) {
+		if (menuItem.getText().equals("Load")) {
 			
 				Persistence persistence = new Persistence();
 				try {

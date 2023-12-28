@@ -12,8 +12,8 @@ import ar.com.airdrop.vistas.MainMenu;
 
 public class MenuBar extends JMenuBar{
 
-	private static String[] labels = {"Archivo"};
-	private static String[] labelsItems = {"Editar Local","Guardar","Cargar"};
+	private static String[] labels = {"File"};
+	private static String[] labelsItems = {"Edit Local","Save","Load"};
 	private LinkedList<JMenu> itemsMenu = new LinkedList<JMenu>();
 	 private MainMenu contextoPadre;
 	

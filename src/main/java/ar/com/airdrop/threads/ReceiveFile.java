@@ -9,11 +9,11 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
+import ar.com.airdrop.context.Constants;
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.dominio.GiveMeFileMessage;
-import ar.com.airdrop.dominio.TakeFileMessage;
+import ar.com.airdrop.domine.GiveMeFileMessage;
+import ar.com.airdrop.domine.TakeFileMessage;
 import ar.com.airdrop.services.FileService;
-import ar.com.commons.send.airdrop.Constantes;
 
 public class ReceiveFile extends Thread {
 
@@ -27,7 +27,7 @@ public class ReceiveFile extends Thread {
 		
 		try {
 			socket = new ServerSocket(
-					Constantes.PUERTO_ARCHIVOS);
+					Constants.FILES_PORT);
 		} catch (IOException e1) {
 			JOptionPane.showMessageDialog(null, "Error con el socket");
 			e1.printStackTrace();

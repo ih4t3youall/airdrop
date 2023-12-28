@@ -4,11 +4,11 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Message;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
 import ar.com.airdrop.services.SendService;
 import ar.com.airdrop.services.PcService;
-import ar.com.commons.send.airdrop.Mensaje;
-import ar.com.commons.send.airdrop.Pc;
 
 public class Scanner {
 
@@ -21,7 +21,7 @@ public class Scanner {
 
 	public void inicioEscanner() throws InterruptedException {
 
-		String ipAEscanear = limpiarIp(pcService.obtenerIpLocal());
+		String ipAEscanear = limpiarIp(pcService.getLocalPcIp());
 
 		for (int i = 0; i < 255; i++) {
 
@@ -35,14 +35,12 @@ public class Scanner {
 		Thread.sleep(7000);
 
 		for (Pc pc : pcs) {
-			if (!pc.getIp().equals(pcService.obtenerIpLocal())) {
+			if (!pc.getIp().equals(pcService.getLocalPcIp())) {
 
-				Mensaje mensaje = new Mensaje(pcService.getPcLocal());
-				mensaje.setIpDestino(pc.getIp());
-				mensaje.setComando("who");
+				Message message = new Message(pcService.getLocalPc(),"who",pc.getIp());
 
 				try {
-					sendService.sendMessage(mensaje);
+					sendService.sendMessage(message);
 				} catch (SendThroughtSocketException e) {
 					e.printStackTrace();
 				}

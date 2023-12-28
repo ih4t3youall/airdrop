@@ -3,9 +3,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="ipService" class="ar.com.commons.send.services.IpService">
+	<bean id="ipService" class="ar.com.airdrop.services.IpService">
 	</bean>
-
 <!-- 	<bean id="pcLocal" class="ar.com.airdrop.services.PcLocal"> -->
 <!-- 	</bean> -->
 	<bean id="pcService" class="ar.com.airdrop.services.PcService">
@@ -15,11 +14,6 @@
 	</bean>
 	<bean id="archivoService" class="ar.com.airdrop.services.FileService">
 	</bean>
-	<bean id="recepcionService" class="ar.com.airdrop.services.RecepcionService">
+	<bean id="receptionService" class="ar.com.airdrop.services.ReceptionService">
 	</bean>
-
-	
-
-
-
 </beans>
