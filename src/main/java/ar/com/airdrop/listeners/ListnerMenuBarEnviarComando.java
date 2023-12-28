@@ -6,22 +6,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.exceptions.EnviarSocketException;
-import ar.com.airdrop.services.EnvioService;
-import ar.com.airdrop.vistas.PantallaIngresarComando;
+import ar.com.airdrop.exceptions.SendThroughtSocketException;
+import ar.com.airdrop.services.SendService;
+import ar.com.airdrop.vistas.InsertCommandView;
 import ar.com.commons.send.airdrop.Mensaje;
 import ar.com.commons.send.airdrop.Pc;
 
 public class ListnerMenuBarEnviarComando implements ActionListener {
 
 
-	private PantallaIngresarComando contexto;
+	private InsertCommandView contexto;
 	private Pc pcExterna;
-	private EnvioService envioService = (EnvioService) SpringContext
-			.getContext().getBean("envioService");
+	private SendService sendService = (SendService) SpringContext
+			.getContext().getBean("sendService");
 	
-	public ListnerMenuBarEnviarComando(PantallaIngresarComando contexto,
-			Pc pcExterna) {
+	public ListnerMenuBarEnviarComando(InsertCommandView contexto,
+									   Pc pcExterna) {
 		this.pcExterna = pcExterna;
 		this.contexto = contexto;
 	}
@@ -39,8 +39,8 @@ public class ListnerMenuBarEnviarComando implements ActionListener {
 			mensaje.setMensaje("tixati");
 			mensaje.setRespuesta(false);
 			try {
-				envioService.enviarMensaje(mensaje);
-			} catch (EnviarSocketException e1) {
+				sendService.sendMessage(mensaje);
+			} catch (SendThroughtSocketException e1) {
 				e1.printStackTrace();
 			} finally {
 
@@ -58,8 +58,8 @@ public class ListnerMenuBarEnviarComando implements ActionListener {
 			mensaje.setMensaje("killall tixati");
 			mensaje.setRespuesta(false);
 			try {
-				envioService.enviarMensaje(mensaje);
-			} catch (EnviarSocketException e1) {
+				sendService.sendMessage(mensaje);
+			} catch (SendThroughtSocketException e1) {
 				e1.printStackTrace();
 			} finally {
 

@@ -1,27 +1,27 @@
 package ar.com.airdrop.services;
 
-import ar.com.airdrop.exceptions.RecibirServerSocketException;
-import ar.com.airdrop.persistencia.Persistencia;
-import ar.com.airdrop.threads.RecibirMensaje;
-import ar.com.airdrop.vistas.MenuPrincipal;
+import ar.com.airdrop.exceptions.ServerSocketReceivingException;
+import ar.com.airdrop.persistencia.Persistence;
+import ar.com.airdrop.threads.ReceiveMessage;
+import ar.com.airdrop.vistas.MainMenu;
 import ar.com.commons.send.socket.Server;
 
 
 public class RecepcionService {
 
 
-	public void iniciarServerSocketObjetos(MenuPrincipal menuPrincipal){
+	public void iniciarServerSocketObjetos(MainMenu mainMenu){
 
-		RecibirMensaje recibirMensaje;
+		ReceiveMessage receiveMessage;
 		try {
-			recibirMensaje = new RecibirMensaje(menuPrincipal);
-		recibirMensaje.start();
+			receiveMessage = new ReceiveMessage(mainMenu);
+		receiveMessage.start();
 		//new RecibirArchivo().start();
 			System.out.println("starting file receiver service");
 
-			Thread t = new Thread(new Server(Persistencia.getDownloadDirectory()));
+			Thread t = new Thread(new Server(Persistence.getDownloadDirectory()));
 			t.start();
-		} catch (RecibirServerSocketException e) {
+		} catch (ServerSocketReceivingException e) {
 			e.printStackTrace();
 		}
 	}

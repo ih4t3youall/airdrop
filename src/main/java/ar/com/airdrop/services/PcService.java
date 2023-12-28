@@ -3,8 +3,8 @@ package ar.com.airdrop.services;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import ar.com.airdrop.exceptions.ArchivoNoExisteException;
-import ar.com.airdrop.persistencia.Persistencia;
+import ar.com.airdrop.exceptions.FileNotFoundException;
+import ar.com.airdrop.persistencia.Persistence;
 import ar.com.commons.send.airdrop.Pc;
 
 public class PcService implements Serializable{
@@ -14,12 +14,12 @@ public class PcService implements Serializable{
 
 	
 	public PcService(){
-		Persistencia persistencia = new Persistencia();
+		Persistence persistence = new Persistence();
 		//se fija si hay configuraciones y las carga
 		
 			try {
-				persistencia.recuperarGuardado(this);
-			} catch (ArchivoNoExisteException e) {
+				persistence.recuperarGuardado(this);
+			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

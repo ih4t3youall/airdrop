@@ -3,26 +3,24 @@ package ar.com.airdrop.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.exceptions.ArchivoNoExisteException;
-import ar.com.airdrop.persistencia.Persistencia;
+import ar.com.airdrop.exceptions.FileNotFoundException;
+import ar.com.airdrop.persistencia.Persistence;
 import ar.com.airdrop.services.PcService;
-import ar.com.airdrop.vistas.Editar;
-import ar.com.airdrop.vistas.MenuPrincipal;
+import ar.com.airdrop.vistas.Edit;
+import ar.com.airdrop.vistas.MainMenu;
 
 public class ListnerMenuBar implements ActionListener {
 
 	private PcService pcService = (PcService) SpringContext
 			.getContext().getBean("pcService");
-	private MenuPrincipal contextoPadre;
+	private MainMenu contextoPadre;
 		
 	
 
-	public ListnerMenuBar(MenuPrincipal contextoPadre2) {
+	public ListnerMenuBar(MainMenu contextoPadre2) {
 		this.contextoPadre = contextoPadre2;
 	}
 
@@ -32,24 +30,24 @@ public class ListnerMenuBar implements ActionListener {
 
 		if (menuItem.getText().equals("Editar Local")) {
 
-			new Editar(pcService.getPcLocal(),contextoPadre);
+			new Edit(pcService.getPcLocal(),contextoPadre);
 
 		}
 		if (menuItem.getText().equals("Guardar")) {
 			
 			 
-				 Persistencia persistencia = new Persistencia();
-				 persistencia.Guardar(pcService);
+				 Persistence persistence = new Persistence();
+				 persistence.Guardar(pcService);
 			
 		}
 		if (menuItem.getText().equals("Cargar")) {
 			
-				Persistencia persistencia = new Persistencia();
+				Persistence persistence = new Persistence();
 				try {
-					persistencia.recuperarGuardado(pcService);
+					persistence.recuperarGuardado(pcService);
 					this.contextoPadre .cargarLista();
 					this.contextoPadre .renovarNombre();
-				} catch (ArchivoNoExisteException e) {
+				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
