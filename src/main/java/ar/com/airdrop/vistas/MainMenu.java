@@ -26,7 +26,7 @@ import ar.com.airdrop.services.ReceptionService;
 
 public class MainMenu extends JFrame {
 
-	private JButton escanear, enviarArchivos, salir, ingresarIp, enviarMensaje,
+	private JButton escanear, enviarArchivos, salir, insertIp, enviarMensaje,
 			editar, enviarComando;
 	private LinkedList<Pc> pcs = new LinkedList<Pc>();
 	//es un helper del modelo que dibuja pero no es la actual lista de pc no se porque
@@ -47,7 +47,7 @@ public class MainMenu extends JFrame {
 		escanear = new JButton("Scanner");
 		enviarArchivos = new JButton("Send Files");
 		salir = new JButton("Exit");
-		ingresarIp = new JButton("Insert Ip");
+		insertIp = new JButton("Insert Ip");
 		enviarMensaje = new JButton("Send Message");
 		enviarComando = new JButton("Send Command");
 
@@ -98,7 +98,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(ingresarIp, constraints);
+		this.getContentPane().add(insertIp, constraints);
 		constraints.weighty = 0.0;
 
 		// boton 3
@@ -133,7 +133,7 @@ public class MainMenu extends JFrame {
 		constraints.weighty = 0.0;
 
 		this.escanear.addActionListener(new ScannerListener(this));
-		this.ingresarIp.addActionListener(new ListenerInsertIp());
+		this.insertIp.addActionListener(new ListenerInsertIp());
 		this.salir.addActionListener(new ListenerExitButton(this));
 		this.enviarMensaje.addActionListener(new ListenerSendMessage(lista));
 		//this.enviarArchivos.addActionListener(new ListenerSendFile(lista));
@@ -182,7 +182,7 @@ public class MainMenu extends JFrame {
 		this.escanear.setEnabled(false);
 		this.enviarArchivos.setEnabled(false);
 		this.salir.setEnabled(false);
-		this.ingresarIp.setEnabled(false);
+		this.insertIp.setEnabled(false);
 
 	}
 
@@ -191,7 +191,7 @@ public class MainMenu extends JFrame {
 		this.escanear.setEnabled(true);
 		this.enviarArchivos.setEnabled(true);
 		this.salir.setEnabled(true);
-		this.ingresarIp.setEnabled(true);
+		this.insertIp.setEnabled(true);
 
 	}
 
