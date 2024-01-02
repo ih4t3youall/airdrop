@@ -26,8 +26,8 @@ import ar.com.airdrop.services.ReceptionService;
 
 public class MainMenu extends JFrame {
 
-	private JButton escanear, enviarArchivos, salir, insertIp, enviarMensaje,
-			editar, enviarComando;
+	private JButton scan, sendFiles, exit, insertIp, sendMessage,
+			edit, sendCommand;
 	private LinkedList<Pc> pcs = new LinkedList<Pc>();
 	//es un helper del modelo que dibuja pero no es la actual lista de pc no se porque
 	private List lista = new List();
@@ -38,18 +38,18 @@ public class MainMenu extends JFrame {
 			.getBean("receptionService");
 
 	public MainMenu() {
-		super("Escanner : " + pcService.getLocalPcIp());
+		super("V2 Scanner : " + pcService.getLocalPcIp());
 
 		this.setJMenuBar(new MenuBar(this));
 
 		GridBagConstraints constraints = new GridBagConstraints();
-		editar = new JButton("Edit");
-		escanear = new JButton("Scanner");
-		enviarArchivos = new JButton("Send Files");
-		salir = new JButton("Exit");
+		edit = new JButton("Edit");
+		scan = new JButton("Scanner");
+		sendFiles = new JButton("Send Files");
+		exit = new JButton("Exit");
 		insertIp = new JButton("Insert Ip");
-		enviarMensaje = new JButton("Send Message");
-		enviarComando = new JButton("Send Command");
+		sendMessage = new JButton("Send Message");
+		sendCommand = new JButton("Send Command");
 
 		Dimension size = new Dimension(550, 200);
 
@@ -77,7 +77,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(escanear, constraints);
+		this.getContentPane().add(scan, constraints);
 		constraints.weighty = 0.0;
 
 		// boton 2
@@ -88,7 +88,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(enviarArchivos, constraints);
+		this.getContentPane().add(sendFiles, constraints);
 		constraints.weighty = 0.0;
 
 		// ip a mano
@@ -109,7 +109,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(salir, constraints);
+		this.getContentPane().add(exit, constraints);
 		constraints.weighty = 0.0;
 
 		// boton Editar
@@ -119,7 +119,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(editar, constraints);
+		this.getContentPane().add(edit, constraints);
 		constraints.weighty = 0.0;
 
 		// boton enviarComando
@@ -129,16 +129,16 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(enviarComando, constraints);
+		this.getContentPane().add(sendCommand, constraints);
 		constraints.weighty = 0.0;
 
-		this.escanear.addActionListener(new ScannerListener(this));
+		this.scan.addActionListener(new ScannerListener(this));
 		this.insertIp.addActionListener(new ListenerInsertIp());
-		this.salir.addActionListener(new ListenerExitButton(this));
-		this.enviarMensaje.addActionListener(new ListenerSendMessage(lista));
+		this.exit.addActionListener(new ListenerExitButton(this));
+		this.sendMessage.addActionListener(new ListenerSendMessage(lista));
 		//this.enviarArchivos.addActionListener(new ListenerSendFile(lista));
-		this.editar.addActionListener(new ListenerEdit(lista, this));
-		this.enviarComando.addActionListener(new ListenerSendCommand(lista));
+		this.edit.addActionListener(new ListenerEdit(lista, this));
+		this.sendCommand.addActionListener(new ListenerSendCommand(lista));
 
 		receptionService.initReceivingSocket(this);
 
@@ -152,7 +152,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(enviarMensaje, constraints);
+		this.getContentPane().add(sendMessage, constraints);
 		constraints.weighty = 0.0;
 
 		// cerrar y terminar programa
@@ -179,18 +179,18 @@ public class MainMenu extends JFrame {
 
 	public void deshabilitarBotones() {
 
-		this.escanear.setEnabled(false);
-		this.enviarArchivos.setEnabled(false);
-		this.salir.setEnabled(false);
+		this.scan.setEnabled(false);
+		this.sendFiles.setEnabled(false);
+		this.exit.setEnabled(false);
 		this.insertIp.setEnabled(false);
 
 	}
 
 	public void habilitarBotones() {
 
-		this.escanear.setEnabled(true);
-		this.enviarArchivos.setEnabled(true);
-		this.salir.setEnabled(true);
+		this.scan.setEnabled(true);
+		this.sendFiles.setEnabled(true);
+		this.exit.setEnabled(true);
 		this.insertIp.setEnabled(true);
 
 	}

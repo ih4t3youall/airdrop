@@ -12,8 +12,11 @@ import ar.com.airdrop.vistas.MainMenu;
 import ar.com.airdrop.vistas.ReceivePromptMessageView;
 import com.google.gson.Gson;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -89,25 +92,33 @@ public class ReceiveMessage extends Thread {
 
                 }
 
-                //if (mensaje.getComando().equals("archivo")) {
+                if (messageReceived.getCommand().equals("archivo")) {
+                    JFileChooser jfc = new JFileChooser();
+                    jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                        fileService.archivoARecibir(messageReceived);
+                        fileService.setDirectorioSalvado(jfc.getSelectedFile().getAbsolutePath());
 
-                //    JFileChooser jfc = new JFileChooser();
-                //    jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                //    if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-                //        fileService.archivoARecibir(mensaje);
-                //        fileService.setDirectorioSalvado(jfc.getSelectedFile().getAbsolutePath());
+                        //el payload deberia ser solamente el nombre del archivo y el filetype deberia ser Filename
+                        Message mensajeRespuesta = new Message(
+                                pcService.getLocalPc(),"okArchivo",ipOtroCliente, messageReceived.getPayload(),"fileName");
+                        sendService.sendMessage(mensajeRespuesta);
+                    }
+                }
 
 
-                //        Mensaje mensajeRespuesta = new Mensaje(
-                //                pcService.getPcLocal());
-                //        mensajeRespuesta.setIpDestino(ipOtroCliente);
-                //        mensajeRespuesta.setComando("okArchivo");
-                //        mensajeRespuesta.setNombreArchivo(mensaje
-                //                .getNombreArchivo());
-                //        sendService.sendMessage(mensajeRespuesta);
-                //    }
+                if (messageReceived.getCommand().equals("okArchivo")) {
 
-                //}
+                    File fileToSend = fileService
+                            .obtenerArchivoAEviar();
+                    Socket socketEnviarArch = new Socket(
+                            messageReceived.getSenderPc().getIp(),
+                            Constants.FILES_PORT);
+                    sendService.sendFile(fileToSend.getAbsolutePath(), new ObjectOutputStream(
+                            socketEnviarArch.getOutputStream()));
+                }
+
+
                 //if (mensaje.getComando().equals("bash")){
 
                 //    Process p = Runtime.getRuntime().exec(mensaje.getMensaje());
@@ -137,28 +148,10 @@ public class ReceiveMessage extends Thread {
 
 
                 //if (mensaje.getComando().equals("respuestaComando")){
-
                 //    new CommandResponseView(mensaje);
 
                 //}
 
-
-                //if (mensaje.getComando().equals("okArchivo")) {
-
-                //    Mensaje archivoAEviar = fileService
-                //            .obtenerArchivoAEviar();
-
-                //    Socket socketEnviarArch = new Socket(
-                //            archivoAEviar.getIpDestino(),
-                //            Constantes.PUERTO_ARCHIVOS);
-
-                //    sendService.sendFile(archivoAEviar.getFile()
-                //            .getAbsolutePath(), new ObjectOutputStream(
-                //            socketEnviarArch.getOutputStream()));
-
-
-
-                //}
 
 
                 this.mainMenu.cargarLista();

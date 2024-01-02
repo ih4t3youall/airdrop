@@ -31,11 +31,11 @@ public class SendService{
 			while (leidos > -1)
 			{
 
-				// Se rellena el n�mero de bytes leidos
+				// Se rellena el numero de bytes leidos
 				mensaje.bytesValidos = leidos;
 
-				// Si no se han leido el m�ximo de bytes, es porque el fichero
-				// se ha acabado y este es el �ltimo mensaje
+				// Si no se han leido el maximo de bytes, es porque el fichero
+				// se ha acabado y este es el ultimo mensaje
 				if (leidos < TakeFileMessage.LONGITUD_MAXIMA)
 				{
 					mensaje.ultimoMensaje = true;
@@ -44,10 +44,10 @@ public class SendService{
 				else
 					mensaje.ultimoMensaje = false;
 
-				// Se env�a por el socket
+				// Se envia por el socket
 				oos.writeObject(mensaje);
 
-				// Si es el �ltimo mensaje, salimos del bucle.
+				// Si es el ultimo mensaje, salimos del bucle.
 				if (mensaje.ultimoMensaje)
 					break;
 

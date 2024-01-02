@@ -3,6 +3,8 @@ package ar.com.airdrop.services;
 
 import ar.com.airdrop.domine.Message;
 
+import java.io.File;
+
 public class FileService {
 	
 	
@@ -17,9 +19,10 @@ public class FileService {
 		
 	}
 	
-	public Message obtenerArchivoAEviar(){
-		
-		return message;
+	public File obtenerArchivoAEviar(){
+
+		//originalmente Mensaje devolvia un file, ahora no, asi que lo creo con el payload que deberia ser un filename.
+		return new File(message.getPayload());
 		
 	}
 	
