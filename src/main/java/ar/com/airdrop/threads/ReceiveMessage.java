@@ -124,12 +124,12 @@ public class ReceiveMessage extends Thread {
                     JFileChooser jfc = new JFileChooser();
                     jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                     if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-                        fileService.archivoARecibir(new File(messageReceived.getPayload()));
+                        fileService.archivoARecibir(messageReceived.getPayload());
                         fileService.setDirectorioSalvado(jfc.getSelectedFile().getAbsolutePath());
 
                         //el payload deberia ser solamente el nombre del archivo y el filetype deberia ser Filename
                         Message mensajeRespuesta = new Message(
-                                pcService.getLocalPc(),"okArchivo",otherClientIp, messageReceived.getPayload(),"fileName");
+                                pcService.getLocalPc(),Commands.OK_FILE,otherClientIp, messageReceived.getPayload(),null);
                         sendService.sendMessage(mensajeRespuesta);
                     }
                 }

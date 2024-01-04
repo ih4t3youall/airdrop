@@ -9,11 +9,13 @@ public class FileService {
 	
 	
 	private File file;
+
+	private String fileName;
 	
 	private String directorioSalvado="";
 	
 
-	public void archivoAEnviar(Message mensaje){
+	public void archivoAEnviar(File file){
 		
 		this.file = file;
 		
@@ -27,11 +29,11 @@ public class FileService {
 	}
 	
 	public String obtenerNombreArchivo(){
-		return file.getName();
+		return this.fileName;
 	}
 
-	public void archivoARecibir(File file) {
-		this.file = file;
+	public void archivoARecibir(String fileName) {
+		this.fileName = fileName;
 	}
 
 

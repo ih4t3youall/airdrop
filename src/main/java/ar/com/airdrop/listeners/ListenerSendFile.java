@@ -9,7 +9,6 @@ import java.net.Socket;
 import javax.swing.JFileChooser;
 
 import ar.com.airdrop.context.Constants;
-import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.SendService;
@@ -29,15 +28,13 @@ public class ListenerSendFile implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			Pc localPc = pcService.getLocalPc();
 			int selectedIndex = list.getSelectedIndex();
-			pcService.getExternalPcList().get(selectedIndex);
-			//(  Pc senderPc,   String command,   String targetIp, String payload, String payloadType)
-			Message message =  new Message(localPc, )
-			Socket socket = new Socket(message.getTargetIp(), Constants.FILES_PORT);
+			Pc targetPc = pcService.getExternalPcList().get(selectedIndex);
+
+			Socket socket = new Socket(targetPc.getIp(), Constants.FILES_PORT);
 			
 			JFileChooser jfc = new JFileChooser();
-			 jfc.showOpenDialog(null);
+			jfc.showOpenDialog(null);
 
 			sendService.sendFile(jfc.getSelectedFile().getAbsolutePath(),new ObjectOutputStream(socket.getOutputStream()));
 

@@ -7,6 +7,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import ar.com.airdrop.context.Commands;
+import ar.com.airdrop.context.Constants;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
@@ -32,12 +34,12 @@ public class SendFileView extends JFrame {
 
 			if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-				Message mensaje = new Message(this.pc, "archivo", this.pc.getIp(),null,null);
+				Message mensaje = new Message(this.pc, Commands.FILE, this.pc.getIp(),jfc.getSelectedFile().getName(),null);
 				//TODO(not implemented)
 				//mensaje.setNombreArchivo(jfc.getSelectedFile().getName());
 			//	mensaje.setFile(jfc.getSelectedFile());
 				
-				fileService.archivoAEnviar(mensaje);
+				fileService.archivoAEnviar(jfc.getSelectedFile());
 				sendService.sendMessage(mensaje);
 				
 				
