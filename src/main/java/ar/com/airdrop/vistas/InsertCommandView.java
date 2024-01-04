@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import ar.com.airdrop.componentes.SendCommandMenuBar;
+import ar.com.airdrop.context.Commands;
 import ar.com.airdrop.context.PayloadType;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.BashCommand;
@@ -63,7 +64,7 @@ public class InsertCommandView extends JFrame {
 				Pc pc = new Pc("192.168.1.1");
 
 				BashCommand bashCommand = new BashCommand(textoComando.getText(),check.isEnabled());
-				Message textMessage = new Message(pc,"bash", pcExterna.getIp(), gson.toJson(bashCommand), PayloadType.BASH_COMMAND);
+				Message textMessage = new Message(pc, Commands.BASH, pcExterna.getIp(), gson.toJson(bashCommand), PayloadType.BASH_COMMAND);
 				try {
 					sendService.sendMessage(textMessage);
 				} catch (SendThroughtSocketException e1) {

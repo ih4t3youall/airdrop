@@ -3,6 +3,7 @@ package ar.com.airdrop.Escaner;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+import ar.com.airdrop.context.Commands;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
@@ -37,7 +38,7 @@ public class Scanner {
 		for (Pc pc : pcs) {
 			if (!pc.getIp().equals(pcService.getLocalPcIp())) {
 
-				Message message = new Message(pcService.getLocalPc(),"who",pc.getIp(),null,null);
+				Message message = new Message(pcService.getLocalPc(), Commands.WHO,pc.getIp(),null,null);
 
 				try {
 					sendService.sendMessage(message);

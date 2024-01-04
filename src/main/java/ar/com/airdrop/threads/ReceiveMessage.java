@@ -77,7 +77,7 @@ public class ReceiveMessage extends Thread {
 
                     pcService.addPcExterna(messageReceived.getSenderPc());
                     //TODO la pc esta nula
-                    Message mensajeRespuesta = new Message(pcResponse,"authentication",
+                    Message mensajeRespuesta = new Message(pcResponse,Commands.AUTHENTICATION,
                             otherClientIp,null,null);
                     sendService.sendMessage(mensajeRespuesta);
 
@@ -93,6 +93,7 @@ public class ReceiveMessage extends Thread {
                 if (messageReceived.getCommand().equals(Commands.MESSAGE_PROMPT)) {
                     new ReceivePromptMessageView(messageReceived);
                 }
+
                 if (messageReceived.getCommand().equals(Commands.BASH)){
 
                     BashCommand bashCommand = gson.fromJson(messageReceived.getPayload(), BashCommand.class);

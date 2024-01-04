@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import ar.com.airdrop.context.Commands;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
@@ -55,7 +56,7 @@ public class ManualInsertIpView extends JFrame {
 				
 				Pc pc = pcService.getLocalPc();
 				
-				Message mensaje = new Message(pc,"who", textoIp.getText(),null,null);
+				Message mensaje = new Message(pc, Commands.WHO, textoIp.getText(),null,null);
 
 				try {
 					
