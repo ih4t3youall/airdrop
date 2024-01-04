@@ -11,17 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Message;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
 import ar.com.airdrop.services.SendService;
 import ar.com.airdrop.services.PcService;
-import ar.com.commons.send.airdrop.Mensaje;
-import ar.com.commons.send.airdrop.Pc;
 
 public class ManualInsertIpView extends JFrame {
 
-	
+
 	/**
-	 * 
+	 *
 	 */
 	
 	JTextField textoIp = new JTextField("",20);
@@ -53,15 +53,10 @@ public class ManualInsertIpView extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Pc pc = pcService.getPcLocal();
+				Pc pc = pcService.getLocalPc();
 				
-				Mensaje mensaje = new Mensaje(pc);
-				mensaje.setIpDestino(textoIp.getText());
-				mensaje.setComando("who");
-				
-				
-				
-				
+				Message mensaje = new Message(pc,"who", textoIp.getText(),null,null);
+
 				try {
 					
 					sendService.sendMessage(mensaje);

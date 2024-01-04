@@ -3,58 +3,45 @@ package ar.com.airdrop;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Pc;
+import ar.com.airdrop.exceptions.ServiceException;
+import ar.com.airdrop.services.FileService;
+import ar.com.airdrop.services.IpService;
 import ar.com.airdrop.services.PcService;
-import ar.com.airdrop.services.RecepcionService;
 import ar.com.airdrop.vistas.MainMenu;
-import ar.com.commons.send.airdrop.Pc;
-import ar.com.commons.send.services.IpService;
 
 public class Start {
 
 	private static IpService ipService = (IpService) SpringContext.getContext()
 			.getBean("ipService");
-	private RecepcionService recepcionService = (RecepcionService) SpringContext
-			.getContext().getBean("recepcionService");
+	private FileService fileService = (FileService) SpringContext
+			.getContext().getBean("archivoService");
 	private PcService pcService = (PcService) SpringContext
 			.getContext().getBean("pcService");
-	
-	
+
+
 
 	public Start() {
 
 		Pc pc = null;
 		try {
-			pc = ipService.obtenerIp();
-			if (pcService.obtenerIpLocal().equals("0")){
-			pcService.setIpLocalhost(pc.getIp());
+			pc = ipService.getIp();
+			if (pcService.getLocalPcIp().equals("0")){
+				pcService.setLocalhostIp(pc.getIp());
 			}
-			pcService.setNombreLocal(pc.getNombreEquipo());
-
-			
+			pcService.setLocalPcName(pc.getPcName());
 		} catch (Exception e) {
 			JOptionPane
 					.showMessageDialog(null,
 							"Error al obtener la ip local, verifique su conexion a internet");
 			System.exit(0);
+		} catch (ServiceException e) {
+			throw new RuntimeException(e);
 		}
-//
-//		try {
-//			new Escanear().inicioEscanner();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//
-//		
-//			
-//			new EscanerPuertos().inicioEscanner();
-			
-		
-		
+
 		MainMenu mainMenu = new MainMenu();
-		recepcionService.iniciarServerSocketObjetos(mainMenu);
+		//receptionService.iniciarServerSocketObjetos(mainMenu);
 		mainMenu.setVisible(true);
-
-
 	}
 
 	public IpService getIpService() {
@@ -65,12 +52,12 @@ public class Start {
 		this.ipService = ipService;
 	}
 
-	public RecepcionService getRecepcionService() {
-		return recepcionService;
+	public FileService getRecepcionService() {
+		return fileService;
 	}
 
-	public void setRecepcionService(RecepcionService recepcionService) {
-		this.recepcionService = recepcionService;
+	public void setRecepcionService(FileService fileService) {
+		this.fileService = fileService;
 	}
 
 }

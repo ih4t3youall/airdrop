@@ -1,6 +1,6 @@
 package ar.com.airdrop.vistas;
 
-import ar.com.commons.send.airdrop.Mensaje;
+import ar.com.airdrop.domine.Message;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -24,16 +24,16 @@ public class ReceivePromptMessageView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 	JTextField textfield = new JTextField("", 30);
-	JButton portaPapeles = new JButton("Copiar portapapeles");
-	JButton aceptar = new JButton("Aceptar");
-	StringSelection aCopiar;
+	JButton portaPapeles = new JButton("Copy to clipboard");
+	JButton aceptar = new JButton("Ok");
+	StringSelection toCopy;
 
-	public ReceivePromptMessageView(Mensaje mensaje) {
+	public ReceivePromptMessageView(Message message) {
 
-		String texto = "";
-		texto = mensaje.getMensaje();
+		String text = "";
+		text = message.getPayload();
 
-		aCopiar = new StringSelection(texto);
+		toCopy = new StringSelection(text);
 
 		Dimension d = new Dimension(400, 100);
 
@@ -44,7 +44,7 @@ public class ReceivePromptMessageView extends JFrame {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new FlowLayout());
-		textfield.setText(texto);
+		textfield.setText(text);
 
 		panel.add(textfield);
 		panel.add(portaPapeles);
@@ -57,7 +57,7 @@ public class ReceivePromptMessageView extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 
-				cb.setContents(aCopiar, null);
+				cb.setContents(toCopy, null);
 
 			}
 		});

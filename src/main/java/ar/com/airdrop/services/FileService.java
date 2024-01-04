@@ -1,37 +1,39 @@
 package ar.com.airdrop.services;
 
 
-import ar.com.commons.send.airdrop.Mensaje;
+import ar.com.airdrop.domine.Message;
 
 public class FileService {
 	
 	
-	private Mensaje mensaje;
+	private Message message;
 	
 	private String directorioSalvado="";
 	
 
-	public void archivoAEnviar(Mensaje mensaje){
+	public void archivoAEnviar(Message mensaje){
 		
-		this.mensaje = mensaje;
+		this.message = mensaje;
 		
 	}
 	
-	public Mensaje obtenerArchivoAEviar(){
+	public Message obtenerArchivoAEviar(){
 		
-		return mensaje;
+		return message;
 		
 	}
 	
 	public String obtenerNombreArchivo(){
-		
-		return mensaje.getFile().getName();
+
+		//TODO(not implemented)
+		//return message.getFile().getName();
+		return null;
 		
 	}
 
-	public void archivoARecibir(Mensaje mensaje) {
+	public void archivoARecibir(Message mensaje) {
 
-		this.mensaje = mensaje;
+		this.message = mensaje;
 	}
 
 

@@ -14,39 +14,42 @@ import javax.swing.JOptionPane;
 
 import ar.com.airdrop.componentes.MenuBar;
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.listeners.ScannerListener;
 import ar.com.airdrop.listeners.ListenerInsertIp;
 import ar.com.airdrop.listeners.ListenerExitButton;
 import ar.com.airdrop.listeners.ListenerEdit;
-import ar.com.airdrop.listeners.ListenerSendFile;
 import ar.com.airdrop.listeners.ListenerSendMessage;
 import ar.com.airdrop.listeners.ListenerSendCommand;
 import ar.com.airdrop.services.PcService;
-import ar.com.commons.send.airdrop.Pc;
+import ar.com.airdrop.services.ReceptionService;
 
 public class MainMenu extends JFrame {
 
-	private JButton escanear, enviarArchivos, salir, ingresarIp, enviarMensaje,
+	private JButton escanear, enviarArchivos, salir, insertIp, enviarMensaje,
 			editar, enviarComando;
 	private LinkedList<Pc> pcs = new LinkedList<Pc>();
+	//es un helper del modelo que dibuja pero no es la actual lista de pc no se porque
 	private List lista = new List();
 
 	private static PcService pcService = (PcService) SpringContext.getContext()
 			.getBean("pcService");
+	private static ReceptionService receptionService = (ReceptionService) SpringContext.getContext()
+			.getBean("receptionService");
 
 	public MainMenu() {
-		super("Escanner : " + pcService.obtenerIpLocal());
+		super("Escanner : " + pcService.getLocalPcIp());
 
 		this.setJMenuBar(new MenuBar(this));
 
 		GridBagConstraints constraints = new GridBagConstraints();
-		editar = new JButton("Editar");
-		escanear = new JButton("Escanear");
-		enviarArchivos = new JButton("Enviar Archivos");
-		salir = new JButton("Salir");
-		ingresarIp = new JButton("Ingresar Ip");
-		enviarMensaje = new JButton("Enviar Mensaje");
-		enviarComando = new JButton("Enviar Comando");
+		editar = new JButton("Edit");
+		escanear = new JButton("Scanner");
+		enviarArchivos = new JButton("Send Files");
+		salir = new JButton("Exit");
+		insertIp = new JButton("Insert Ip");
+		enviarMensaje = new JButton("Send Message");
+		enviarComando = new JButton("Send Command");
 
 		Dimension size = new Dimension(550, 200);
 
@@ -95,7 +98,7 @@ public class MainMenu extends JFrame {
 		constraints.gridheight = 1;
 		// constraints.fill = GridBagConstraints.BOTH;
 
-		this.getContentPane().add(ingresarIp, constraints);
+		this.getContentPane().add(insertIp, constraints);
 		constraints.weighty = 0.0;
 
 		// boton 3
@@ -130,16 +133,18 @@ public class MainMenu extends JFrame {
 		constraints.weighty = 0.0;
 
 		this.escanear.addActionListener(new ScannerListener(this));
-		this.ingresarIp.addActionListener(new ListenerInsertIp());
+		this.insertIp.addActionListener(new ListenerInsertIp());
 		this.salir.addActionListener(new ListenerExitButton(this));
 		this.enviarMensaje.addActionListener(new ListenerSendMessage(lista));
-		this.enviarArchivos.addActionListener(new ListenerSendFile(lista));
+		//this.enviarArchivos.addActionListener(new ListenerSendFile(lista));
 		this.editar.addActionListener(new ListenerEdit(lista, this));
 		this.enviarComando.addActionListener(new ListenerSendCommand(lista));
 
+		receptionService.initReceivingSocket(this);
+
 		this.cargarLista();
 
-		// enviar mensaje
+		// enviar mensajddde
 		// ip a mano
 		constraints.gridx = 4;
 		constraints.gridy = 1;
@@ -177,7 +182,7 @@ public class MainMenu extends JFrame {
 		this.escanear.setEnabled(false);
 		this.enviarArchivos.setEnabled(false);
 		this.salir.setEnabled(false);
-		this.ingresarIp.setEnabled(false);
+		this.insertIp.setEnabled(false);
 
 	}
 
@@ -186,27 +191,24 @@ public class MainMenu extends JFrame {
 		this.escanear.setEnabled(true);
 		this.enviarArchivos.setEnabled(true);
 		this.salir.setEnabled(true);
-		this.ingresarIp.setEnabled(true);
+		this.insertIp.setEnabled(true);
 
 	}
 
 	public void cargarLista() {
 
-		LinkedList<Pc> ListaOtrasPc = pcService.obtenerListaPcExternas();
+		LinkedList<Pc> ListaOtrasPc = pcService.getExternalPcList();
 
 		lista.removeAll();
 
 		for (Pc pc : ListaOtrasPc) {
 			String aux = "";
-			if (pc.getNombreEquipo().length() > 14)
-				aux = pc.getNombreEquipo().substring(0, 14);
+			if (pc.getPcName().length() > 14)
+				aux = pc.getPcName().substring(0, 14);
 			else
-				aux = pc.getNombreEquipo();
-
+				aux = pc.getPcName();
 			lista.add(aux);
-
 		}
-
 	}
 
 	public static PcService getPcService() {
@@ -218,7 +220,7 @@ public class MainMenu extends JFrame {
 	}
 
 	public void renovarNombre() {
-		this.setTitle(pcService.getPcLocal().getIp());
+		this.setTitle(pcService.getLocalPc().getIp());
 
 	}
 

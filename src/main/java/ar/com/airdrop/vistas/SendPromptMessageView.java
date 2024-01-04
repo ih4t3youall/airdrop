@@ -11,24 +11,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Message;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
+import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.SendService;
-import ar.com.commons.send.airdrop.Mensaje;
-import ar.com.commons.send.airdrop.Pc;
 
 public class SendPromptMessageView extends JFrame {
 
 	JTextField textfield = new JTextField("", 30);
 	JButton aceptar, cancelar;
-	private Pc pc;
+	private Pc pcExterna;
+
+	private PcService pcService = (PcService) SpringContext.getContext()
+			.getBean("pcService");
 
 	private SendService sendService = (SendService) SpringContext
 			.getContext().getBean("sendService");
 
 	public SendPromptMessageView(Pc pc1) {
-		this.pc = pc1;
-		this.aceptar = new JButton("Aceptar");
-		this.cancelar = new JButton("Cancelar");
+		this.pcExterna = pc1;
+		this.aceptar = new JButton("Ok");
+		this.cancelar = new JButton("Cancel");
 
 		Dimension d = new Dimension(400, 100);
 
@@ -62,14 +66,7 @@ public class SendPromptMessageView extends JFrame {
 		aceptar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				Mensaje mensaje = new Mensaje(pc);
-
-				mensaje.setComando("mensajePrompt");
-
-				mensaje.setIpDestino(pc.getIp());
-				
-				mensaje.setMensaje(textfield.getText());
-
+				Message mensaje = new Message(pcService.getLocalPc(),"mensajePrompt", pcExterna.getIp(), textfield.getText(),null);
 				try {
 					sendService.sendMessage(mensaje);
 				} catch (SendThroughtSocketException e1) {

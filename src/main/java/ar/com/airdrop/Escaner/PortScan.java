@@ -1,11 +1,12 @@
 package ar.com.airdrop.Escaner;
 
-import java.util.Iterator;
-import java.util.LinkedList;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.services.PcService;
-import ar.com.commons.send.airdrop.Pc;
+
+import java.util.Iterator;
+import java.util.LinkedList;
 
 
 public class PortScan {
@@ -16,17 +17,12 @@ public class PortScan {
 
 	
 	public void inicioEscanner(){
-		
-		
-		
-		
-		Iterator<Pc> iterator = pcService.obtenerListaPcExternas().iterator();
-		
+
+		Iterator<Pc> iterator = pcService.getExternalPcList().iterator();
 		LinkedList<Pc> filtradas = new LinkedList<Pc>();
 		
 		while(iterator.hasNext()){
 			Pc pc = iterator.next();
-			
 			
 		ThreadScanPorts thread =new ThreadScanPorts(pc,filtradas);
 		thread.start();
@@ -38,23 +34,17 @@ public class PortScan {
 			e.printStackTrace();
 		}
 		
-		pcService.setPcExternas(filtradas);
+		pcService.setExpternalPc(filtradas);
 		
 		
 	}
-
-
 
 	public PcService getPcService() {
 		return pcService;
 	}
 
-
-
 	public void setPcService(PcService pcService) {
 		this.pcService = pcService;
 	}
-	
-	
-	
+
 }

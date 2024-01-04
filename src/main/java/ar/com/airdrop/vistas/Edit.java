@@ -1,6 +1,7 @@
 package ar.com.airdrop.vistas;
 
-import ar.com.commons.send.airdrop.Pc;
+
+import ar.com.airdrop.domine.Pc;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -47,12 +48,12 @@ public class Edit extends JFrame {
 		panel.add(eliminar);
 		
 		ip.setText(pc.getIp());
-		nombreEquipo.setText(pc.getNombreEquipo());
+		nombreEquipo.setText(pc.getPcName());
 		
 		aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				pc.setIp(ip.getText());
-				pc.setNombreEquipo(nombreEquipo.getText());
+				pc.setPcName(nombreEquipo.getText());
 				contextoPadre.cargarLista();
 				contextoPadre.renovarNombre();
 				contexto.dispose();

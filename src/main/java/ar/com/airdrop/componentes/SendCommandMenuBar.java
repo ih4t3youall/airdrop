@@ -10,9 +10,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.listeners.ListnerMenuBarEnviarComando;
 import ar.com.airdrop.vistas.InsertCommandView;
-import ar.com.commons.send.airdrop.Pc;
 
 
 public class SendCommandMenuBar extends JMenuBar{

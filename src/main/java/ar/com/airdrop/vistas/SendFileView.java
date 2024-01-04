@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Message;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.services.FileService;
 import ar.com.airdrop.services.SendService;
-import ar.com.commons.send.airdrop.Mensaje;
-import ar.com.commons.send.airdrop.Pc;
 
 public class SendFileView extends JFrame {
 
@@ -32,12 +32,10 @@ public class SendFileView extends JFrame {
 
 			if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-				Mensaje mensaje = new Mensaje(this.pc);
-				mensaje.setIpDestino(this.pc.getIp());
-				mensaje.setFile(new File(archivo.getText()));
-				mensaje.setComando("archivo");
-				mensaje.setNombreArchivo(jfc.getSelectedFile().getName());
-				mensaje.setFile(jfc.getSelectedFile());
+				Message mensaje = new Message(this.pc, "archivo", this.pc.getIp(),null,null);
+				//TODO(not implemented)
+				//mensaje.setNombreArchivo(jfc.getSelectedFile().getName());
+			//	mensaje.setFile(jfc.getSelectedFile());
 				
 				fileService.archivoAEnviar(mensaje);
 				sendService.sendMessage(mensaje);

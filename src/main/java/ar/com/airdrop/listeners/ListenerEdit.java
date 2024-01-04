@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.vistas.Edit;
 import ar.com.airdrop.vistas.MainMenu;
-import ar.com.commons.send.airdrop.Pc;
 
 public class ListenerEdit implements ActionListener {
 
@@ -39,7 +39,7 @@ public class ListenerEdit implements ActionListener {
 			
 			
 		}else {
-		Pc pcExterna = pcService.obtenerListaPcExternas().get(selectedIndex);
+		Pc pcExterna = pcService.getExternalPcList().get(selectedIndex);
 		
 		new Edit(pcExterna, mainMenu);
 		

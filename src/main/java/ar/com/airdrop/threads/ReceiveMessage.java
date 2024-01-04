@@ -1,26 +1,27 @@
 package ar.com.airdrop.threads;
 
+import ar.com.airdrop.context.Commands;
+import ar.com.airdrop.context.Constants;
+import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.BashCommand;
+import ar.com.airdrop.domine.Message;
+import ar.com.airdrop.domine.Pc;
+import ar.com.airdrop.exceptions.ServerSocketReceivingException;
+import ar.com.airdrop.services.FileService;
+import ar.com.airdrop.services.PcService;
+import ar.com.airdrop.services.SendService;
+import ar.com.airdrop.vistas.CommandResponseView;
+import ar.com.airdrop.vistas.MainMenu;
+import ar.com.airdrop.vistas.ReceivePromptMessageView;
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import javax.swing.JFileChooser;
-
-import ar.com.airdrop.context.SpringContext;
-import ar.com.airdrop.exceptions.ServerSocketReceivingException;
-import ar.com.airdrop.services.FileService;
-import ar.com.airdrop.services.SendService;
-import ar.com.airdrop.services.PcService;
-import ar.com.airdrop.vistas.MainMenu;
-import ar.com.airdrop.vistas.CommandResponseView;
-import ar.com.airdrop.vistas.ReceivePromptMessageView;
-import ar.com.commons.send.airdrop.Constantes;
-import ar.com.commons.send.airdrop.Mensaje;
-import ar.com.commons.send.airdrop.Pc;
+import java.net.SocketException;
 
 public class ReceiveMessage extends Thread {
 
@@ -31,7 +32,9 @@ public class ReceiveMessage extends Thread {
     private FileService fileService = (FileService) SpringContext
             .getContext().getBean("archivoService");
 
-    private static int PUERTO = Constantes.PUERTO;
+    private Gson gson = new Gson();
+
+    private static int PUERTO = Constants.PORT;
     private MainMenu mainMenu;
 
     public ReceiveMessage(MainMenu mainMenu)
@@ -56,55 +59,46 @@ public class ReceiveMessage extends Thread {
             try {
                 Socket cliente = socket.accept();
 
-                String ipOtroCliente = cliente.getInetAddress()
+                String otherClientIp = cliente.getInetAddress()
                         .getHostAddress();
-                System.out.println("Conectado con cliente de " + ipOtroCliente);
+                System.out.println("Conectado con cliente de " + otherClientIp);
 
                 cliente.setSoLinger(true, 10);
 
                 ObjectInputStream buffer = new ObjectInputStream(
                         cliente.getInputStream());
 
-                Mensaje mensaje = (Mensaje) buffer.readObject();
+                String json = (String) buffer.readObject();
+                Message messageReceived = gson.fromJson(json,Message.class);
+                if (messageReceived.getCommand().equals(Commands.WHO)) {
 
-                if (mensaje.getComando().equals("who")) {
+                    //TODO pc service no funciona todavia
+                    Pc pcResponse = pcService.getLocalPc();
 
-                    Pc respuestaPc = pcService.getPcLocal();
-
-                    pcService.addPcExterna(mensaje.getPc());
-                    Mensaje mensajeRespuesta = new Mensaje(
-                            pcService.getPcLocal());
-                    mensajeRespuesta.setIpDestino(ipOtroCliente);
-                    mensajeRespuesta.setComando("autenticar");
-                    mensajeRespuesta.setIpDestino(ipOtroCliente);
+                    pcService.addPcExterna(messageReceived.getSenderPc());
+                    //TODO la pc esta nula
+                    Message mensajeRespuesta = new Message(pcResponse,"authentication",
+                            otherClientIp,null,null);
                     sendService.sendMessage(mensajeRespuesta);
 
                 }
+                if (messageReceived.getCommand().equals(Commands.AUTHENTICATION)) {
 
-                if (mensaje.getComando().equals("archivo")) {
-
-                    JFileChooser jfc = new JFileChooser();
-                    jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                    if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-                        fileService.archivoARecibir(mensaje);
-                        fileService.setDirectorioSalvado(jfc.getSelectedFile().getAbsolutePath());
-
-
-                        Mensaje mensajeRespuesta = new Mensaje(
-                                pcService.getPcLocal());
-                        mensajeRespuesta.setIpDestino(ipOtroCliente);
-                        mensajeRespuesta.setComando("okArchivo");
-                        mensajeRespuesta.setNombreArchivo(mensaje
-                                .getNombreArchivo());
-                        sendService.sendMessage(mensajeRespuesta);
-                    }
-
+                    System.out.println("Recibi una pc de la ip : "
+                            + otherClientIp);
+                    Pc pc = messageReceived.getSenderPc();
+                    pcService.addPcExterna(pc);
                 }
-                if (mensaje.getComando().equals("bash")){
 
-                    Process p = Runtime.getRuntime().exec(mensaje.getMensaje());
+                if (messageReceived.getCommand().equals(Commands.MESSAGE_PROMPT)) {
+                    new ReceivePromptMessageView(messageReceived);
+                }
+                if (messageReceived.getCommand().equals(Commands.BASH)){
 
-                    if (mensaje.isRespuesta()){
+                    BashCommand bashCommand = gson.fromJson(messageReceived.getPayload(), BashCommand.class);
+                    Process p = Runtime.getRuntime().exec(bashCommand.getCommand());
+
+                    if (bashCommand.withResponse()){
                         BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
                         String s = null;
@@ -117,55 +111,59 @@ public class ReceiveMessage extends Thread {
                         stdInput.close();
                         stdError.close();
 
-                        Mensaje mensajeRespuesta = new Mensaje(
-                                pcService.getPcLocal());
-                        mensajeRespuesta.setIpDestino(ipOtroCliente);
-                        mensajeRespuesta.setComando("respuestaComando");
-                        mensajeRespuesta.setMensaje(respuestaComando);
-                        sendService.sendMessage(mensajeRespuesta);
+                        Message responseCommmandMessage = new Message(
+                                pcService.getLocalPc(),Commands.COMMAND_RESPONSE,otherClientIp,respuestaComando,null);
+                        sendService.sendMessage(responseCommmandMessage);
                     }
 
                 }
 
+                //if (mensaje.getComando().equals("archivo")) {
 
-                if (mensaje.getComando().equals("respuestaComando")){
-
-                    new CommandResponseView(mensaje);
-
-                }
-
-
-                if (mensaje.getComando().equals("okArchivo")) {
-
-                    Mensaje archivoAEviar = fileService
-                            .obtenerArchivoAEviar();
-
-                    Socket socketEnviarArch = new Socket(
-                            archivoAEviar.getIpDestino(),
-                            Constantes.PUERTO_ARCHIVOS);
-
-                    sendService.sendFile(archivoAEviar.getFile()
-                            .getAbsolutePath(), new ObjectOutputStream(
-                            socketEnviarArch.getOutputStream()));
+                //    JFileChooser jfc = new JFileChooser();
+                //    jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                //    if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                //        fileService.archivoARecibir(mensaje);
+                //        fileService.setDirectorioSalvado(jfc.getSelectedFile().getAbsolutePath());
 
 
+                //        Mensaje mensajeRespuesta = new Mensaje(
+                //                pcService.getPcLocal());
+                //        mensajeRespuesta.setIpDestino(ipOtroCliente);
+                //        mensajeRespuesta.setComando("okArchivo");
+                //        mensajeRespuesta.setNombreArchivo(mensaje
+                //                .getNombreArchivo());
+                //        sendService.sendMessage(mensajeRespuesta);
+                //    }
 
-                }
-                if (mensaje.getComando().equals("autenticar")) {
+                //}
 
-                    System.out.println("Recibi una pc de la ip : "
-                            + ipOtroCliente);
 
-                    Pc pc = mensaje.getPc();
-                    pcService.addPcExterna(pc);
+
+                if (messageReceived.getCommand().equals(Commands.COMMAND_RESPONSE)){
+
+                    new CommandResponseView(messageReceived);
 
                 }
 
-                if (mensaje.getComando().equals("mensajePrompt")) {
 
-                    new ReceivePromptMessageView(mensaje);
+               // if (mensaje.getComando().equals("okArchivo")) {
 
-                }
+               //     Mensaje archivoAEviar = fileService
+               //             .obtenerArchivoAEviar();
+
+               //     Socket socketEnviarArch = new Socket(
+               //             archivoAEviar.getIpDestino(),
+               //             Constantes.PUERTO_ARCHIVOS);
+
+               //     sendService.sendFile(archivoAEviar.getFile()
+               //             .getAbsolutePath(), new ObjectOutputStream(
+               //             socketEnviarArch.getOutputStream()));
+
+
+
+                //}
+
 
                 this.mainMenu.cargarLista();
 

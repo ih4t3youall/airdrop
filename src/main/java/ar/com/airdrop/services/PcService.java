@@ -1,74 +1,65 @@
 package ar.com.airdrop.services;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 
-import ar.com.airdrop.exceptions.FileNotFoundException;
-import ar.com.airdrop.persistencia.Persistence;
-import ar.com.commons.send.airdrop.Pc;
+import ar.com.airdrop.domine.Pc;
 
-public class PcService implements Serializable{
+public class PcService {
 
 	private Pc pcLocal = new Pc("0");
-	private LinkedList<Pc> pcExternas = new LinkedList<Pc>();
+	private LinkedList<Pc> expternalPc = new LinkedList<Pc>();
 
-	
+
 	public PcService(){
-		Persistence persistence = new Persistence();
+		//Persistence persistence = new Persistence();
 		//se fija si hay configuraciones y las carga
-		
-			try {
-				persistence.recuperarGuardado(this);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		
-		
-	}
-	
-	
-	public void setPcExternas(LinkedList<Pc> pcExternas){
-		
-		this.pcExternas = pcExternas;
-		
-	}
-	
-	
-	public Pc getPcLocal() {
 
+		//try {
+		//	//TODO not implemented
+		//	persistence.recuperarGuardado(this);
+		//} catch (FileNotFoundException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+	}
+
+
+	public void setExpternalPc(LinkedList<Pc> expternalPc){
+		this.expternalPc = expternalPc;
+	}
+
+	public Pc getLocalPc() {
 		return pcLocal;
 	}
 
-	public void setIpLocalhost(String ip) {
+	public void setLocalhostIp(String ip) {
 
 		pcLocal.setIp(ip);
 
 	}
 
-	public void setNombreLocal(String nombre) {
+	public void setLocalPcName(String name) {
 
-		pcLocal.setNombreEquipo(nombre);
+		pcLocal.setPcName(name);
 
 	}
 
-	public String obtenerIpLocal() {
+	public String getLocalPcIp() {
 		return this.pcLocal.getIp();
 	}
 
 	public String obtenerNombrePcLocal() {
-		return this.pcLocal.getNombreEquipo();
+		return this.pcLocal.getPcName();
 	}
 
 	public void addPcExterna(Pc pc) {
 
 		boolean f = true;
-		for (Pc iterPc : pcExternas) {
+		for (Pc iterPc : expternalPc) {
 
 			if (iterPc.getIp().equals(pc.getIp())) {
 				//para actualizar cuando cambia por archivo->Editar local, asi se actualiza la lista.
-				iterPc.setNombreEquipo(pc.getNombreEquipo());
+				iterPc.setPcName(pc.getPcName());
 				f = false;
 			}
 
@@ -76,16 +67,16 @@ public class PcService implements Serializable{
 
 		if (f) {
 
-			this.pcExternas.add(pc);
+			this.expternalPc.add(pc);
 		}
 	}
 
-	public LinkedList<Pc> obtenerListaPcExternas() {
-		return this.pcExternas;
+	public LinkedList<Pc> getExternalPcList() {
+		return this.expternalPc;
 	}
 
 	public void limpiarLista() {
-		pcExternas.clear();
+		expternalPc.clear();
 	}
 
 }

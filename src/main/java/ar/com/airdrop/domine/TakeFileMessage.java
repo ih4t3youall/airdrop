@@ -1,4 +1,4 @@
-package ar.com.airdrop.dominio;
+package ar.com.airdrop.domine;
 
 
 import java.io.Serializable;
