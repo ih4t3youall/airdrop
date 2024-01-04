@@ -15,12 +15,7 @@ import javax.swing.JOptionPane;
 import ar.com.airdrop.componentes.MenuBar;
 import ar.com.airdrop.context.SpringContext;
 import ar.com.airdrop.domine.Pc;
-import ar.com.airdrop.listeners.ScannerListener;
-import ar.com.airdrop.listeners.ListenerInsertIp;
-import ar.com.airdrop.listeners.ListenerExitButton;
-import ar.com.airdrop.listeners.ListenerEdit;
-import ar.com.airdrop.listeners.ListenerSendMessage;
-import ar.com.airdrop.listeners.ListenerSendCommand;
+import ar.com.airdrop.listeners.*;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.ReceptionService;
 
@@ -136,7 +131,7 @@ public class MainMenu extends JFrame {
 		this.insertIp.addActionListener(new ListenerInsertIp());
 		this.exit.addActionListener(new ListenerExitButton(this));
 		this.sendMessage.addActionListener(new ListenerSendMessage(lista));
-		//this.enviarArchivos.addActionListener(new ListenerSendFile(lista));
+		this.sendFiles.addActionListener(new ListenerSendFile(lista, pcService));
 		this.edit.addActionListener(new ListenerEdit(lista, this));
 		this.sendCommand.addActionListener(new ListenerSendCommand(lista));
 
@@ -177,23 +172,6 @@ public class MainMenu extends JFrame {
 
 	}
 
-	public void deshabilitarBotones() {
-
-		this.scan.setEnabled(false);
-		this.sendFiles.setEnabled(false);
-		this.exit.setEnabled(false);
-		this.insertIp.setEnabled(false);
-
-	}
-
-	public void habilitarBotones() {
-
-		this.scan.setEnabled(true);
-		this.sendFiles.setEnabled(true);
-		this.exit.setEnabled(true);
-		this.insertIp.setEnabled(true);
-
-	}
 
 	public void cargarLista() {
 
