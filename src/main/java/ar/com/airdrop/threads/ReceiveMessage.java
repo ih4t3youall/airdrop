@@ -10,6 +10,7 @@ import ar.com.airdrop.exceptions.ServerSocketReceivingException;
 import ar.com.airdrop.services.FileService;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.services.SendService;
+import ar.com.airdrop.vistas.CommandResponseView;
 import ar.com.airdrop.vistas.MainMenu;
 import ar.com.airdrop.vistas.ReceivePromptMessageView;
 import com.google.gson.Gson;
@@ -111,7 +112,7 @@ public class ReceiveMessage extends Thread {
                         stdError.close();
 
                         Message responseCommmandMessage = new Message(
-                                pcService.getLocalPc(),"respuestaComando",otherClientIp,respuestaComando,null);
+                                pcService.getLocalPc(),Commands.COMMAND_RESPONSE,otherClientIp,respuestaComando,null);
                         sendService.sendMessage(responseCommmandMessage);
                     }
 
@@ -139,25 +140,25 @@ public class ReceiveMessage extends Thread {
 
 
 
-                //if (mensaje.getComando().equals("respuestaComando")){
+                if (messageReceived.getCommand().equals(Commands.COMMAND_RESPONSE)){
 
-                //    new CommandResponseView(mensaje);
+                    new CommandResponseView(messageReceived);
 
-                //}
+                }
 
 
-                //if (mensaje.getComando().equals("okArchivo")) {
+               // if (mensaje.getComando().equals("okArchivo")) {
 
-                //    Mensaje archivoAEviar = fileService
-                //            .obtenerArchivoAEviar();
+               //     Mensaje archivoAEviar = fileService
+               //             .obtenerArchivoAEviar();
 
-                //    Socket socketEnviarArch = new Socket(
-                //            archivoAEviar.getIpDestino(),
-                //            Constantes.PUERTO_ARCHIVOS);
+               //     Socket socketEnviarArch = new Socket(
+               //             archivoAEviar.getIpDestino(),
+               //             Constantes.PUERTO_ARCHIVOS);
 
-                //    sendService.sendFile(archivoAEviar.getFile()
-                //            .getAbsolutePath(), new ObjectOutputStream(
-                //            socketEnviarArch.getOutputStream()));
+               //     sendService.sendFile(archivoAEviar.getFile()
+               //             .getAbsolutePath(), new ObjectOutputStream(
+               //             socketEnviarArch.getOutputStream()));
 
 
 

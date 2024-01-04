@@ -6,5 +6,6 @@ public class Commands {
     public static String AUTHENTICATION="authentication";
     public static String MESSAGE_PROMPT="messagePrompt";
     public static String BASH="bash";
+    public static String COMMAND_RESPONSE="commandResponse";
 
 }
