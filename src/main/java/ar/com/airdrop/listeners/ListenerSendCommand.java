@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.BashCommand;
 import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.services.PcService;
 import ar.com.airdrop.vistas.InsertCommandView;
@@ -34,8 +35,6 @@ int selectedIndex = this.lista.getSelectedIndex();
 			
 		}else {
 		Pc pcExterna = pcService.getExternalPcList().get(selectedIndex);
-		
-		
 		new InsertCommandView(pcExterna);
 		}
 		
