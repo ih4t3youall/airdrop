@@ -10,12 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import ar.com.airdrop.componentes.SendCommandMenuBar;
+import ar.com.airdrop.context.PayloadType;
 import ar.com.airdrop.context.SpringContext;
+import ar.com.airdrop.domine.BashCommand;
 import ar.com.airdrop.domine.Message;
 import ar.com.airdrop.domine.Pc;
 import ar.com.airdrop.exceptions.SendThroughtSocketException;
 import ar.com.airdrop.services.SendService;
 import ar.com.airdrop.services.PcService;
+import com.google.gson.Gson;
 
 public class InsertCommandView extends JFrame {
 
@@ -24,6 +27,7 @@ public class InsertCommandView extends JFrame {
 	private PcService pcService =(PcService) SpringContext.getContext().getBean("pcService");
 	private SendService sendService = (SendService) SpringContext.getContext().getBean("sendService");
 	private JCheckBox check;
+	private Gson gson =  new Gson();
 
 	public InsertCommandView(final Pc pcExterna){
 
@@ -58,7 +62,8 @@ public class InsertCommandView extends JFrame {
 				//TODO ipservice not implemented el primer parametro deberia ser la pc local
 				Pc pc = new Pc("192.168.1.1");
 
-				Message textMessage = new Message(pc,"bash", pcExterna.getIp(), textoComando.getText(),null);
+				BashCommand bashCommand = new BashCommand(textoComando.getText(),check.isEnabled());
+				Message textMessage = new Message(pc,"bash", pcExterna.getIp(), gson.toJson(bashCommand), PayloadType.BASH_COMMAND);
 				try {
 					sendService.sendMessage(textMessage);
 				} catch (SendThroughtSocketException e1) {
