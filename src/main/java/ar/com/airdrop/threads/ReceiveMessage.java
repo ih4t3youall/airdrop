@@ -76,7 +76,7 @@ public class ReceiveMessage extends Thread {
 
                     pcService.addPcExterna(messageReceived.getSenderPc());
                     //TODO la pc esta nula
-                    Message mensajeRespuesta = new Message(pcResponse,"autenticar",
+                    Message mensajeRespuesta = new Message(pcResponse,"authentication",
                             otherClientIp,null,null);
                     sendService.sendMessage(mensajeRespuesta);
 
