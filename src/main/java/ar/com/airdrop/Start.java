@@ -8,6 +8,7 @@ import ar.com.airdrop.exceptions.ServiceException;
 import ar.com.airdrop.services.FileService;
 import ar.com.airdrop.services.IpService;
 import ar.com.airdrop.services.PcService;
+import ar.com.airdrop.threads.ReceiveFile;
 import ar.com.airdrop.vistas.MainMenu;
 
 public class Start {
@@ -24,6 +25,8 @@ public class Start {
 	public Start() {
 
 		Pc pc = null;
+		ReceiveFile receiveFile = new ReceiveFile();
+		receiveFile.start();
 		try {
 			pc = ipService.getIp();
 			if (pcService.getLocalPcIp().equals("0")){

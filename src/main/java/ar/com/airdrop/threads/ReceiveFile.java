@@ -18,7 +18,7 @@ import ar.com.airdrop.services.FileService;
 public class ReceiveFile extends Thread {
 
 	private FileService fileService = (FileService) SpringContext
-			.getContext().getBean("fileService");
+			.getContext().getBean("archivoService");
 
 	private ServerSocket socket;
 	
