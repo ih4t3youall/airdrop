@@ -37,15 +37,12 @@ public class SendFileView extends JFrame {
 				Message mensaje = new Message(this.pc, Commands.FILE, this.pc.getIp(),jfc.getSelectedFile().getName(),null);
 				//TODO(not implemented)
 				//mensaje.setNombreArchivo(jfc.getSelectedFile().getName());
-			//	mensaje.setFile(jfc.getSelectedFile());
+				//	mensaje.setFile(jfc.getSelectedFile());
 				
 				fileService.archivoAEnviar(jfc.getSelectedFile());
 				sendService.sendMessage(mensaje);
-				
-				
 			}
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 

@@ -30,17 +30,14 @@ public class Start {
 				pcService.setLocalhostIp(pc.getIp());
 			}
 			pcService.setLocalPcName(pc.getPcName());
-		} catch (Exception e) {
+		} catch (Exception | ServiceException e) {
 			JOptionPane
 					.showMessageDialog(null,
 							"Error al obtener la ip local, verifique su conexion a internet");
 			System.exit(0);
-		} catch (ServiceException e) {
-			throw new RuntimeException(e);
 		}
 
 		MainMenu mainMenu = new MainMenu();
-		//receptionService.iniciarServerSocketObjetos(mainMenu);
 		mainMenu.setVisible(true);
 	}
 
