@@ -137,7 +137,6 @@ public class ReceiveMessage extends Thread {
 
 
                 if (messageReceived.getCommand().equals(Commands.OK_FILE)) {
-
                     File fileToSend = fileService
                             .obtenerArchivoAEviar();
                     Socket socketEnviarArch = new Socket(

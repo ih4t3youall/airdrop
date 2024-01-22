@@ -24,9 +24,10 @@ public class Start {
 
 	public Start() {
 
+
+		ReceiveFile rs = new ReceiveFile();
+		rs.start();
 		Pc pc = null;
-		ReceiveFile receiveFile = new ReceiveFile();
-		receiveFile.start();
 		try {
 			pc = ipService.getIp();
 			if (pcService.getLocalPcIp().equals("0")){

@@ -139,7 +139,7 @@ public class MainMenu extends JFrame {
 
 		this.cargarLista();
 
-		// enviar mensajddde
+		// enviar mensaje
 		// ip a mano
 		constraints.gridx = 4;
 		constraints.gridy = 1;
