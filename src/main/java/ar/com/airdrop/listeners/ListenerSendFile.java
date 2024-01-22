@@ -43,7 +43,7 @@ public class ListenerSendFile implements ActionListener {
 
 			Pc lcoalPc = pcService.getLocalPc();
 
-			Message message = new Message(lcoalPc, Commands.FILE, targetPc.getIp(), jfc.getName(),"file");
+			Message message = new Message(lcoalPc, Commands.FILE, targetPc.getIp(), jfc.getSelectedFile().getName(),"file");
 				sendService.sendMessage(message);
 				fileService.archivoAEnviar(jfc.getSelectedFile());
 
